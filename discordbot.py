@@ -18,4 +18,10 @@ async def on_message(message):
         return
     if message.content == '/neko':
         await message.channel.send('にゃーん')
+        
+  @client.event
+async def on_message(message):
+    if client.user in message.mentions:
+        reply = f'{message.author.mention} 呼んだ？'
+        await message.channel.send(reply) 
 bot.run(token)
