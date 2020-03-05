@@ -1,16 +1,27 @@
-from discord.ext import commands
-import os
-import traceback
+import discord
+import asyncio
 
-bot = commands.Bot(command_prefix='/')
-token = os.environ['DISCORD_BOT_TOKEN']
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
 @client.event
 async def on_message(message):
-    if message.author.bot:
-        return
-    if message.content == '/neko':
-        await message.channel.send('にゃーん')
-        
+    if message.content.startswith('!test'):
+        counter = 0
+        tmp = await client.send_message(message.channel, 'Calculating messages...')
+        async for log in client.logs_from(message.channel, limit=100):
+            if log.author == message.author:
+                counter += 1
 
-bot.run(token)
+        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+    elif message.content.startswith('!sleep'):
+        await asyncio.sleep(5)
+        await client.send_message(message.channel, 'Done sleeping')
+
+client.run('token')
