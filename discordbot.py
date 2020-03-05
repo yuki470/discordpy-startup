@@ -5,11 +5,6 @@ import traceback
 bot = commands.Bot(command_prefix='!')
 token = os.environ['DISCORD_BOT_TOKEN']
 
- @client.event
-async def on_message(message):
-    if client.user in message.mentions: 
-        reply = f'{message.author.mention} 呼んだ？' 
-        await message.channel.send(reply) 
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
