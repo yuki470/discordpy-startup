@@ -12,7 +12,14 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
+@bot.command(name="こんにちは")
+async def hello(ctx):
+    await ctx.send(f"どうも、{ctx.message.author.name}さん！")
 
+
+@bot.command(name="さようなら")
+async def goodbye(ctx):
+    await ctx.send(f"じゃあね、{ctx.message.author.name}さん！")
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
