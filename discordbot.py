@@ -16,7 +16,13 @@ async def on_command_error(ctx, error):
 async def hello(ctx):
     await ctx.send(f"どうも、{ctx.message.author.name}さん！")
 
-
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def set_members(ctx):
+    role_basic = ctx.guild.get_role(ROLE_BASIC_ID)
+    for member in ctx.guild.members:
+        if not member.bot:
+            await member.add_roles(role_basic)
 @bot.command(name="さようなら")
 async def goodbye(ctx):
     await ctx.send(f"じゃあね、{ctx.message.author.name}さん！")
