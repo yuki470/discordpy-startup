@@ -20,10 +20,6 @@ async def celar(message):
         await message.channel.send("削除しました")
     else:
         await message.channel.send("権限が無いです")
-        
-@bot.command()
-async def kick(ctx, member: discord.Member, *, reason=None):
-    await member.kick (reason=reason)
     
 @bot.command()
 async def ping(ctx):
