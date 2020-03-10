@@ -12,6 +12,12 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
+bot.remove_command('help')
+
+@bot.command()
+async def help(ctx):
+    await ctx.send("```p?celarメッセージを全て消すコマンド```")
+    
 @bot.command(name="こんにちは")
 async def hello(ctx):
     await ctx.send(f"どうも、{ctx.message.author.name}さん！")
