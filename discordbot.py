@@ -12,11 +12,6 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
-bot.remove_command('help')
-
-@bot.command()
-embed = discord.Embed(title="Hi!!",description="How are you?")
-await channel.send(embed=embed)
 
 @bot.command()
 async def celar(message):
