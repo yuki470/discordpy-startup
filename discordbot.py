@@ -21,7 +21,9 @@ bot.remove_command('help')
 async def help(ctx):
     await ctx.send("```p?celarメッセージを全て消すコマンド```\n p?こんにちは　p?さようならで　挨拶！！")
 
-  　　
+@bot.command()
+async def kick(ctx, member: discord.Member, *, reason=None):
+    await member.kick (reason=reason)
 @bot.command(name="こんにちは")
 async def hello(ctx):
     await ctx.send(f"どうも、{ctx.message.author.name}さん！")
