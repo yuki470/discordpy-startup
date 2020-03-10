@@ -16,8 +16,9 @@ bot.remove_command('help')
 
 @bot.command()
 async def help(ctx):
-    await ctx.send("```!celarメッセージを全て消すコマンド```")
-    
+    await ctx.send("```p?celarメッセージを全て消すコマンド```")
+     await ctx.send("```p?こんにちは　さようならで挨拶できます！```")
+        
 @bot.command(name="こんにちは")
 async def hello(ctx):
     await ctx.send(f"どうも、{ctx.message.author.name}さん！")
