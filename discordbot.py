@@ -33,7 +33,7 @@ async def clear(message):
         
 @bot.event
 async def on_member_join(member):
-    channel = discord.utils.get (member.guild.text_channels, name='チャンネルの名前')
+    channel = discord.utils.get (member.guild.text_channels, name='サーバー入室ログ')
     server=member.guild
     e=discord.Embed (description="サーバー入室ログ")
     e.add_field (name="参加ありがとうございます:", value=f"{member.mention}", inline=False)
