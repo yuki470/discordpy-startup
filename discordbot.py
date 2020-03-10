@@ -30,6 +30,14 @@ async def clear(message):
         await message.channel.send("削除しました")
     else:
         await message.channel.send("権限が無いです")
+        
+@bot.event
+async def on_member_join(member):
+    channel = discord.utils.get (member.guild.text_channels, name='チャンネルの名前')
+    server=member.guild
+    e=discord.Embed (description="サーバー入室ログ")
+    e.add_field (name="参加ありがとうございます:", value=f"{member.mention}", inline=False)
+    await channel.send (embed=e)
 @bot.command(name="さようなら")
 async def goodbye(ctx):
     await ctx.send(f"じゃあね、{ctx.message.author.name}さん！")
