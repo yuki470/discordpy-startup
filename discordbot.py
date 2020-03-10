@@ -5,10 +5,7 @@ import traceback
 bot = commands.Bot(command_prefix='<')
 token = os.environ['DISCORD_BOT_TOKEN']
 
-@bot.event
-async def on_command_error(ctx,error):
-    if isinstance(error,commands.CommandNotFound):
-        await ctx.send(f"コマンドは存在しません")
+
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
