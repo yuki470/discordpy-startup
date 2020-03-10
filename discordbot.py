@@ -33,16 +33,6 @@ async def clear(message):
     else:
         await message.channel.send("権限が無いです")
         
-@bot.event
-async def on_member_join(member):
-    channel = discord.utils.get (member.guild.text_channels, name='on_member_join')
-    server=member.guild
-    e=discord.Embed (description="サーバー入室ログ")
-    e.add_field (name="参加ありがとうございます:", value=f"{member.mention}", inline=False)
-    e.add_field (name="現在の人数:", value=server.member_count, inline=False)
-    e.add_field (name="サーバー入室:", value=f"{member.joined_at}", inline=True)
-    e.add_field (name="アカウント作成日:", value=f"{member.created_at}", inline=True)
-    await channel.send (embed=e)
 @bot.command(name="さようなら")
 async def goodbye(ctx):
     await ctx.send(f"じゃあね、{ctx.message.author.name}さん！")
@@ -53,4 +43,15 @@ async def ping(ctx):
 @bot.command()
 async def fuck(ctx):
     await ctx.send('氏ね')
+    
+ @bot.event
+async def on_member_join(member):
+    channel = discord.utils.get (member.guild.text_channels, name='on_member_join')
+    server=member.guild
+    e=discord.Embed (description="サーバー入室ログ")
+    e.add_field (name="参加ありがとうございます:", value=f"{member.mention}", inline=False)
+    e.add_field (name="現在の人数:", value=server.member_count, inline=False)
+    e.add_field (name="サーバー入室:", value=f"{member.joined_at}", inline=True)
+    e.add_field (name="アカウント作成日:", value=f"{member.created_at}", inline=True)
+    await channel.send (embed=e)
 bot.run(token)
