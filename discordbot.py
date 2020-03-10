@@ -16,7 +16,7 @@ bot.remove_command('help')
 
 @bot.command()
 async def help(ctx):
-    await ctx.send("```!celarメッセージを全て消すコマンド```")
+    await ctx.send("```>celarメッセージを全て消すコマンド※管理者のみ```")
 
 @bot.command()
 async def celar(message):
