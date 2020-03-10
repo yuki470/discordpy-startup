@@ -16,7 +16,9 @@ bot.remove_command('help')
 
 @bot.command()
 async def help(ctx):
-    await ctx.send("```p?celarメッセージを全て消すコマンド```")
+    embed = discord.Embed (title="pypy", description="COS BOT のヘルプ", color=0xeee657)
+    embed.add_field (name="p?help", value="コマンドのヘルプ", inline=False)
+    await ctx.send (embed=embed)
     
 @bot.command(name="こんにちは")
 async def hello(ctx):
