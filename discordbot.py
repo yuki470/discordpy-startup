@@ -15,8 +15,10 @@ async def on_command_error(ctx, error):
 bot.remove_command('help')
 
 @bot.command()
-async def help(ctx):
-    await ctx.send("```>celarメッセージを全て消すコマンド※管理者のみ```")
+embed=discord.Embed(title="このbotのprefixは>です", color=0x2e4bd8)
+embed.set_author(name="Help")
+embed.add_field(name="その他コマンド", value=">celarでメッセージを消去します/n※このコマンドは管理者のみ", inline=True)
+await self.bot.say(embed=embed)
 
 @bot.command()
 async def celar(message):
