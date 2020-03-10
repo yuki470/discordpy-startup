@@ -16,7 +16,13 @@ async def on_command_error(ctx, error):
 async def hello(ctx):
     await ctx.send(f"どうも、{ctx.message.author.name}さん！")
 
-
+@bot.command()
+async def clear(message):
+    if message.author.guild_permissions.administrator:
+        await message.channel.purge()
+        await message.channel.send("削除しました")
+    else:
+        await message.channel.send("権限が無いです")
 @bot.command(name="さようなら")
 async def goodbye(ctx):
     await ctx.send(f"じゃあね、{ctx.message.author.name}さん！")
