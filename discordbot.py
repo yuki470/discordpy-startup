@@ -12,7 +12,20 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
+bot.remove_command('help')
 
+@bot.command()
+async def help(ctx):
+    await ctx.send("```!celarメッセージを全て消すコマンド```")
+
+@bot.command()
+async def celar(message):
+    if message.author.guild_permissions.administrator:
+        await message.channel.purge()
+        await message.channel.send("削除しました")
+    else:
+        await message.channel.send("権限が無いです")
+ 
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
