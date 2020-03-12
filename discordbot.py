@@ -6,7 +6,14 @@ import random
 bot = commands.Bot(command_prefix='>')
 token = os.environ['DISCORD_BOT_TOKEN']
 
-
+@client.command()  
+@commands.has_permissions(administrator=True)  
+async def set_members(ctx):  
+    for member in ctx.guild.members:  
+        if not member.bot:  
+            role = discord.utils.find(lambda r: r.name == 'member', ctx.guild.roles)  
+            await member.add_roles(role)  
+            
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
