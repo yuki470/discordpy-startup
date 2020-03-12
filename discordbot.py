@@ -7,11 +7,7 @@ bot = commands.Bot(command_prefix='>')
 client = discord.Client()  
 token = os.environ['DISCORD_BOT_TOKEN']
 
-@client.event  
-async def on_member_join(member):  
-    role = discord.utils.find(lambda r: r.name == 'member', member.guild.roles)  
-    await member.add_roles(role)  
-            
+
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
