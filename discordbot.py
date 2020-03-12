@@ -6,6 +6,19 @@ import random
 bot = commands.Bot(command_prefix='>')
 token = os.environ['DISCORD_BOT_TOKEN']
 
+ID_CHANNEL_README = 0 686880408545132589  
+ID_ROLE_WELCOME = 0 687553310055727104  
+
+@client.event  
+async def on_raw_reaction_add(payload):  
+    channel = client.get_channel(payload.channel_id)  
+    if channel.id == ID_CHANNEL_README:  
+        guild = client.get_guild(payload.guild_id)  
+        member = guild.get_member(payload.user_id)  
+        role = guild.get_role(ID_ROLE_WELCOME)  
+        await member.add_roles(role)  
+        await channel.send('いらっしゃいませ！')  
+        
 @client.command()  
 @commands.has_permissions(administrator=True)  
 async def set_members(ctx):  
