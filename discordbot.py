@@ -22,13 +22,7 @@ async def celar(message):
     else:
         await message.channel.send("権限が無いです")
     
- @client.command()  
-@commands.has_permissions(administrator=True)  
-async def set_members(ctx):  
-    for member in ctx.guild.members:  
-        if not member.bot:  
-            role = discord.utils.find(lambda r: r.name == 'member', ctx.guild.roles)  
-            await member.add_roles(role)  
+ 
   
 @bot.command()
 async def ping(ctx):
