@@ -4,6 +4,7 @@ import traceback
 import random
 
 bot = commands.Bot(command_prefix='>')
+client = discord.Client()  
 token = os.environ['DISCORD_BOT_TOKEN']
 
 @client.event  
