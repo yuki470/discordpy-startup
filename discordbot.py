@@ -28,7 +28,7 @@ async def ping(ctx):
 
 @bot.command()
 async def think(ctx):
-    await ctx.send('pong')    
+    await ctx.send('🤔')    
     
 @bot.command()
 async def fuck(ctx):
