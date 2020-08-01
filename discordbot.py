@@ -3,7 +3,7 @@ import os
 import traceback
 import random
 
-bot = commands.Bot(command_prefix='>')
+bot = commands.Bot(command_prefix='!')
 token = os.environ['DISCORD_BOT_TOKEN']
 
     
@@ -21,13 +21,15 @@ async def celar(message):
         await message.channel.send("削除しました")
     else:
         await message.channel.send("権限が無いです")
-    
- 
-  
+      
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong')
 
+@bot.command()
+async def think(ctx):
+    await ctx.send('pong')    
+    
 @bot.command()
 async def fuck(ctx):
     await ctx.send('氏ね')
