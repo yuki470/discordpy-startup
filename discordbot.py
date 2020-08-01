@@ -7,12 +7,6 @@ import random
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
-
-
-
-
-
-
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
@@ -36,7 +30,16 @@ async def ping(ctx):
 async def think(ctx):
     await ctx.send('🤔')    
   
+@bot.command()
+async def multiply(ctx, one: int, two: int):
+    """ 数を掛ける """
+    await ctx.send(one * two)
 
+@bot.command()
+async def square(ctx, number: int):
+    """ 数を二乗する """
+    # `!multiply <number> <number>` と同じ
+    await ctx.invoke(multiply, number, number)
 
     
 @bot.command()
