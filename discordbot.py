@@ -30,35 +30,54 @@ async def ping(ctx):
 async def think(ctx):
     await ctx.send('🤔')    
   
-@bot.event
-async def on_message(message):
-    if message.author.bot:
-        # もし、送信者がbotなら無視する
+@bot.command(aliases=["connect","summon"]) #connectやsummonでも呼び出せる
+async def join(ctx):
+    """Botをボイスチャンネルに入室させます。"""
+    voice_state = ctx.author.voice
+
+    if (not voice_state) or (not voice_state.channel):
+        await ctx.send("先にボイスチャンネルに入っている必要があります。")
         return
-    GLOBAL_CH_NAME = "hoge-global" # グローバルチャットのチャンネル名
 
-    if message.channel.name == GLOBAL_CH_NAME:
-        # hoge-globalの名前をもつチャンネルに投稿されたので、メッセージを転送する
+    channel = voice_state.channel
 
-        await message.delete() # 元のメッセージは削除しておく
+    await channel.connect()
+    print("connected to:",channel.name)
 
-        channels = client.get_all_channels()
-        global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
-        # channelsはbotの取得できるチャンネルのイテレーター
-        # global_channelsは hoge-global の名前を持つチャンネルのリスト
 
-        embed = discord.Embed(title="hoge-global",
-            description=message.content, color=0x00bfff)
+@bot.command(aliases=["disconnect","bye"])
+async def leave(ctx):
+    """Botをボイスチャンネルから切断します。"""
+    voice_client = ctx.message.guild.voice_client
 
-        embed.set_author(name=message.author.display_name, 
-            icon_url=message.author.avatar_url_as(format="png"))
-        embed.set_footer(text=f"{message.guild.name} / {message.channel.name}",
-            icon_url=message.guild.icon_url_as(format="png"))
-        # Embedインスタンスを生成、投稿者、投稿場所などの設定
+    if not voice_client:
+        await ctx.send("Botはこのサーバーのボイスチャンネルに参加していません。")
+        return
 
-        for channel in global_channels:
-            # メッセージを埋め込み形式で転送
-            await channel.send(embed=embed)
+    await voice_client.disconnect()
+    await ctx.send("ボイスチャンネルから切断しました。")
+
+
+@bot.command()
+async def play(ctx):
+    """指定された音声ファイルを流します。"""
+    voice_client = ctx.message.guild.voice_client
+
+    if not voice_client:
+        await ctx.send("Botはこのサーバーのボイスチャンネルに参加していません。")
+        return
+
+    if not ctx.message.attachments:
+        await ctx.send("ファイルが添付されていません。")
+        return
+
+    await ctx.message.attachments[0].save("tmp.mp3")
+
+    ffmpeg_audio_source = discord.FFmpegPCMAudio("tmp.mp3")
+    voice_client.play(ffmpeg_audio_source)
+
+    await ctx.send("再生しました。")
+
 
     
 @bot.command()
