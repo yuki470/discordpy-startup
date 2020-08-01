@@ -30,6 +30,11 @@ async def ping(ctx):
 async def think(ctx):
     await ctx.send('🤔')    
   
+
+if not discord.opus.is_loaded():
+    discord.opus.load_opus("heroku-buildpack-libopus")
+
+
 @bot.command(aliases=["connect","summon"]) #connectやsummonでも呼び出せる
 async def join(ctx):
     """Botをボイスチャンネルに入室させます。"""
