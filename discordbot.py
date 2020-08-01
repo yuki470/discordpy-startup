@@ -30,7 +30,7 @@ async def ping(ctx):
 async def think(ctx):
     await ctx.send('🤔')    
   
-@client.event
+@bot.event
 async def on_message(message):
     if message.author.bot:
         # もし、送信者がbotなら無視する
