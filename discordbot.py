@@ -9,7 +9,7 @@ answer_set = queue.Queue(maxsize=30)
 current_ans =''
 current_ques = ''
 
-bot = commands.Bot(command_prefix='>')
+bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
     
