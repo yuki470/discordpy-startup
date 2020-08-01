@@ -7,7 +7,21 @@ import random
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
-    
+
+@bot.event
+async def on_message(message):
+    global current_ans
+    if message.author.bot: # メッセージの送信者がBotなら何もしない
+        pass 
+    elif current_ans == '':
+        await bot.change_presence(activity=discord.Game("そんく"))
+    else:
+        await bot.change_presence(activity=discord.Game("しんく"))
+    await bot.process_commands(message) # 忘れないように
+
+
+
+
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
